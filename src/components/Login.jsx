@@ -1,43 +1,59 @@
-// import { Link } from "react-router-dom"
+import React from "react"
 import {
   FormControl,
   FormLabel,
   FormErrorMessage,
   Input,
   Button,
-  Container,
-  Wrap,
   Box,
+  Flex,
+  Stack,
+  Avatar,
+  Heading,
 } from "@chakra-ui/react"
 import { Formik, Form, Field } from "formik"
+import { useNavigate } from "react-router"
 
 const Login = () => {
-  function validateUserName(value) {
+  const navigate = useNavigate()
+
+  const validateUserName = (value) => {
     let error
-    if (!value) {
-      error = "User Name is required"
-    }
+    if (!value) error = "User Name is required!"
     return error
   }
 
-  function validatePassword(value) {
+  const validatePassword = (value) => {
     let error
-    if (!value) {
-      error = "Password is required"
-    }
+    if (!value) error = "Password is required!"
     return error
   }
 
   return (
-    <Container maxW="container.md">
-      <Wrap align="center" justify="center" paddingTop="250">
-        <Box padding="4" maxW="3xl" borderWidth="1px">
+    <Flex
+      flexDirection="column"
+      width="100wh"
+      height="100vh"
+      backgroundColor="gray.200"
+      justifyContent="center"
+      alignItems="center"
+    >
+      <Stack
+        flexDir="column"
+        mb="2"
+        justifyContent="center"
+        alignItems="center"
+      >
+        <Avatar bg="teal.500" />
+        <Heading color="teal.400">Welcome</Heading>
+        <Box minW={{ base: "90%", md: "468px" }} boxShadow="md" p="10">
+          {" "}
           <Formik
             initialValues={{ name: "", password: "" }}
             onSubmit={(values, actions) => {
               setTimeout(() => {
-                alert(JSON.stringify(values, null, 2))
                 actions.setSubmitting(false)
+                navigate("/books")
               }, 1000)
             }}
           >
@@ -49,7 +65,7 @@ const Login = () => {
                       isInvalid={form.errors.name && form.touched.name}
                     >
                       <FormLabel htmlFor="name">User Name</FormLabel>
-                      <Input {...field} id="name" placeholder="name" />
+                      <Input {...field} id="name" placeholder="User Name" />
                       <FormErrorMessage>{form.errors.name}</FormErrorMessage>
                     </FormControl>
                   )}
@@ -72,6 +88,7 @@ const Login = () => {
                   colorScheme="teal"
                   isLoading={props.isSubmitting}
                   type="submit"
+                  data-testid={"submit-button"}
                 >
                   Login
                 </Button>
@@ -79,8 +96,8 @@ const Login = () => {
             )}
           </Formik>
         </Box>
-      </Wrap>
-    </Container>
+      </Stack>
+    </Flex>
   )
 }
 
