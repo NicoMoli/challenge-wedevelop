@@ -7,7 +7,7 @@ import {
   Heading,
   Flex,
 } from "@chakra-ui/react"
-import React, { useEffect, useState, useContext } from "react"
+import React, { useEffect, useState, useContext, useCallback } from "react"
 import FavoritesContext from "../context/favorites"
 import { getBooks } from "../services/getBooks"
 import { useNavigate } from "react-router"
@@ -17,11 +17,10 @@ const Books = () => {
   const { favorites, setFavorites } = useContext(FavoritesContext)
   const navigate = useNavigate()
 
-  useEffect(() => {
-    let fetching = false
-    async function fetchBooks() {
+  const fetchBooks = useCallback(async () => {
+    try {
       const response = await getBooks()
-      if (!fetching && response) {
+      if (response) {
         const formatDataBooks = Object.keys(response.data).map((key) => {
           return response.data[key]
         })
@@ -31,12 +30,13 @@ const Books = () => {
 
         setBooks(data)
       }
+    } catch (error) {
+      console.log("error fetch --", error)
     }
+  }, [])
 
+  useEffect(() => {
     fetchBooks()
-    return () => {
-      fetching = true
-    }
   }, [])
 
   const handleDescription = (key) => {
