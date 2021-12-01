@@ -1,6 +1,6 @@
 import { Flex, Box, Text, Heading } from "@chakra-ui/react"
 import { useContext } from "react"
-import FavoritesContext from "../context/favorites"
+import { FavoritesContext } from "../context/favorites"
 
 const Favorites = () => {
   const { favorites } = useContext(FavoritesContext)

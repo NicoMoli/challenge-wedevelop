@@ -1,8 +1,13 @@
 import { createContext } from "react"
 
-const FavoritesContext = createContext({
+export const FavoritesContext = createContext({
   favorites: null,
-  setFavorites: () => {},
+  setFavorites: () => { },
 })
 
-export default FavoritesContext
+export const UserProfileContext = createContext({
+  userProfile: null,
+  setUserProfile: () => { },
+})
+
+// export default FavoritesContext

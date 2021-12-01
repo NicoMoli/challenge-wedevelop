@@ -8,7 +8,7 @@ import {
   Flex,
 } from "@chakra-ui/react"
 import React, { useEffect, useState, useContext, useCallback } from "react"
-import FavoritesContext from "../context/favorites"
+import { FavoritesContext } from "../context/favorites"
 import { getBooks } from "../services/getBooks"
 import { useNavigate } from "react-router"
 
@@ -147,6 +147,14 @@ const Books = () => {
           >
             {" "}
             Go to Favorites Books
+          </Button>
+          <Button
+            backgroundColor="green.100"
+            onClick={() => navigate("/userprofile")}
+            data-testid={"go-to-user-profile"}
+          >
+            {" "}
+            Go to User Profile
           </Button>
         </Box>
       </Stack>
