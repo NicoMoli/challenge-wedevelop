@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from "@testing-library/react"
+import { render, screen } from "@testing-library/react"
 import Login from "./components/Login"
 import React from 'react'
 import { MemoryRouter } from 'react-router-dom'
@@ -138,11 +138,11 @@ test("render Books component", async () => {
   mockGetBooks.mockResolvedValue(books);
 
   render(<Books />, { wrapper: MemoryRouter })
-  const header = await waitFor(() => expect(screen.getByText("List of Books:")))
-  const containerDiv = await waitFor(() => expect(screen.getByTestId("container-div")))
-  const buttonDescription = await waitFor(() => expect(screen.getByTestId("button-description")))
-  const buttonFavorites = await waitFor(() => screen.getByTestId("button-favorites"))
-  const goToFavorites = await waitFor(() => screen.getByTestId("go-to-favorites"))
+  const header = await screen.findByText("List of Books:")
+  const containerDiv = await screen.findByTestId("container-div")
+  const buttonDescription = await screen.findByTestId("button-description")
+  const buttonFavorites = await screen.findByTestId("button-favorites")
+  const goToFavorites = await screen.findByTestId("go-to-favorites")
 
   expect(header).toBeDefined()
   expect(containerDiv).toBeDefined()
